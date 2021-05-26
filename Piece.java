@@ -43,7 +43,47 @@ public final class Piece {
      */
     private Piece(Point[] points)
     {
-        // TODO: implement constructor
+        double x = 0;
+        double y = 0;
+        double xMax = 0;
+        double yMax = 0;
+        this.body = points;
+        for(int i = 0; i < body.length; i++)
+        {
+
+            x = body[i].getX();
+            if(x > xMax)
+            {
+                xMax = x;
+
+            }
+            y = body[i].getY();
+            if(y > yMax)
+            {
+
+                yMax = y;
+            }
+
+        }
+        width = (int)(xMax+1);
+        height = (int)(yMax +1);
+
+        skirt = new int[width];
+
+        for(int i = 0; i< skirt.length; i++)
+        {
+            skirt[i] = 5;
+            for(int j = 0; j< body.length; j++)
+            {
+                if(body[j].getY() < skirt[i] && body[j].getX() == i)
+                {
+                    skirt[i] = (int)body[j].getY();
+
+                }
+
+            }
+        }
+
     }   
 
     /**
@@ -157,12 +197,12 @@ public final class Piece {
     public String toString()
     {
         String str = "";
-        
-        // TODO: build a string that contains all of the attributes of this Piece
-        
+
+        str = "w: " + width + " h: " + height;
+
         return str;
     }
-    
+
     /**
      * Returns an array containing the first rotation of each of the 7 standard
      *      tetris pieces. The next (counterclockwise) rotation can be obtained
@@ -204,7 +244,7 @@ public final class Piece {
     private static Piece pieceRow(Piece firstPiece)
     {
         Piece piece = firstPiece;
-        
+
         System.out.println("\nfirst piece: " + piece);
 
         // maximum of 4 rotations until we are back at the first piece (we may break earlier)
@@ -218,14 +258,14 @@ public final class Piece {
             }
 
             // TODO: step 1: reflect across the line y = x
-            
+
             // TODO: step 2: reflect across y axis
-            
+
             // TODO: step 3: translate right
-            
+
             // create the rotated piece, update next, prepare for nextIteration
             Piece rotatedPiece = new Piece(rotatedPoints);
-            
+
             System.out.println(rotatedPiece);
 
             // check if we are back to the original piece
