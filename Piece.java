@@ -196,9 +196,7 @@ public final class Piece {
     @Override
     public String toString()
     {
-        String str = "";
-
-        str = "w: " + width + " h: " + height;
+        String str = "Width: " + width  +  " Height: " + height + " Body: " + body.toString() + " Skirt: " + skirt.toString();
 
         return str;
     }
@@ -258,11 +256,39 @@ public final class Piece {
             }
 
             // TODO: step 1: reflect across the line y = x
+            for(int i =  0; i< rotatedPoints.length; i++)
+            {
+                int xTemp = (int) (rotatedPoints[i].getX());
+                rotatedPoints[i].x = (int) rotatedPoints[i].getY();
+                rotatedPoints[i].y = xTemp;
+            }
 
             // TODO: step 2: reflect across y axis
+            for(int i =  0; i< rotatedPoints.length; i++)
+            {
+
+                rotatedPoints[i].x = ((int) rotatedPoints[i].getX()) * -1;
+
+            }
 
             // TODO: step 3: translate right
+            int xMin = 5; 
+            for(int i =  0; i< rotatedPoints.length; i++)
+            {
 
+                if(rotatedPoints[i].getX() < xMin)
+                {
+
+                    xMin = (int) rotatedPoints[i].getX();
+
+                }
+
+            }
+            for(int i = 0; i < rotatedPoints.length; i++)
+            {
+
+                rotatedPoints[i].x = ((int) rotatedPoints[i].getX()) +Math.abs(xMin);           
+            }
             // create the rotated piece, update next, prepare for nextIteration
             Piece rotatedPiece = new Piece(rotatedPoints);
 
