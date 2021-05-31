@@ -14,6 +14,8 @@ public class JBrainTetris extends JTetris
     // instance variables - replace the example below with your own
     private Brain brain;
     private JComboBox comboBox;
+    private boolean isBrainOn;
+    private JButton enabler;
     /**
      * Constructor for objects of class JBrainTetris
      */
@@ -21,7 +23,7 @@ public class JBrainTetris extends JTetris
     {
         // initialise instance variables
         super(width, height);
-
+        isBrainOn = false;
     }
 
     @Override
@@ -39,11 +41,29 @@ public class JBrainTetris extends JTetris
         }
         comboBox = new JComboBox(brainArray);
         c.add(comboBox);
-        Listener listener = new Listener();
+        BrainListener listener = new BrainListener();
         comboBox.addActionListener(listener);
+        enabler = new JButton("Enable Brain");
+        c.add(enabler);
+        EnableListener enableListener = new EnableListener();
+        enabler.addActionListener(enableListener);
         return c;
     }
-    class Listener implements ActionListener
+    public class EnableListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent event)
+        {
+        
+        
+        
+        isBrainOn = true;
+        enabler.setText("Brain Enabled");
+        
+        }
+    
+    }
+    public class BrainListener implements ActionListener
     {
         @Override    
         public void actionPerformed(ActionEvent event)
@@ -61,5 +81,12 @@ public class JBrainTetris extends JTetris
             }
         }
 
+    }
+    @Override
+    public Piece pickNextPiece()
+    {
+    
+    return null;
+    
     }
 }
