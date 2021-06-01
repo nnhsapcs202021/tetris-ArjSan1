@@ -78,7 +78,7 @@ public class JTetris extends JComponent
     protected JSlider speed;
     
     public final int DELAY = 400;   // milliseconds per tick
-    
+    protected int pieceNum;
 
     JTetris(int width, int height)
     {
@@ -224,7 +224,7 @@ public class JTetris extends JComponent
     */
     public Piece pickNextPiece()
     {
-        int pieceNum = (int)(this.pieces.length * this.random.nextDouble());
+        pieceNum = (int)(this.pieces.length * this.random.nextDouble());
         return this.pieces[pieceNum];
     }
     
